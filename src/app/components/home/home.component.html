@@ -1,0 +1,49 @@
+<button (click)="test()">test</button>
+<div class="row">
+  <div class="col-sm-12 col-lg-10 offset-lg-1">
+    <div style="display: flex;" class="row">
+      <div class="col-12">
+        <h1 class="text-white">
+          Top 10 on IMDB this week</h1>
+      </div>
+    </div>
+
+    <div class="card bg-black">
+      <p-carousel [value]="movies" [numVisible]="5" [numScroll]="1"
+        [responsiveOptions]="responsiveOptions" [circular]="false">
+        <ng-template let-movie pTemplate="item">
+          <div class="bg-dark" style="margin-right: 20px;">
+            <div class="border-1 surface-border border-round m-1 p-1">
+              <div style="cursor: pointer;" class="mb-3">
+                <div class="relative mx-auto">
+                  <img (click)="navigateToMovie(movie.id)" class="w-100 h-100" [src]="movie.posterUrl" class="w-100 border-round" />
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-4">
+                  <i class="bi bi-star-fill" style="color: yellow;"></i>
+                  {{ movie.rating }}
+                </div>
+                <div style="margin-top: -5px;" class="col-5">
+                  <button type="button" class="btn btn-transparent">
+                    <i class="bi bi-star" style="color:#5799ef;"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="mb-3 text-white fw-bold">
+                {{ movie.title }}
+              </div>
+              <div class="row">
+                <div class="col-12">
+                  <button style="width: 100%;"  type="button" class="mb-3 btn btn-secondary" (click)="addMovieToWatchlist(movie.id)">
+                    <i style="color:#5799ef;" class="bi bi-plus fw-bold">Watchlist</i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-template>
+      </p-carousel>
+    </div>
+  </div>
+</div>

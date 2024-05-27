@@ -8,9 +8,9 @@ import { HomeComponent } from './components/home/home.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
-import { authInterceptor } from './services/auth/auth.interceptor';
-import { HttpClientModule, provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
-import { ReactiveFormsModule } from '@angular/forms';
+import { AuthInterceptor } from './services/auth/auth.interceptor';
+import { HTTP_INTERCEPTORS, HttpClientModule, provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CarouselModule } from 'primeng/carousel';
 import { MovieComponent } from './components/movie/movie.component';
 
@@ -29,11 +29,13 @@ import { MovieComponent } from './components/movie/movie.component';
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
-    CarouselModule
+    CarouselModule,
+    FormsModule
   ],
   providers: [
     provideClientHydration(),
-    provideHttpClient(withInterceptors([authInterceptor]),withFetch())
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+
   ],
   bootstrap: [AppComponent]
 })

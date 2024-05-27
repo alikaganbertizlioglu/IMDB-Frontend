@@ -24,13 +24,16 @@
           <div class="input-group mb-auto">
             <div class="input-group-prepend">
               <button class="btn btn-outline-secondary dropdown-toggle bg-light fw-bold fw-black" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                All
+                  {{ selectedOption }}
               </button>
               <div class="dropdown-menu">
-                <a class="dropdown-item" href="#">not implemented</a>
+                  <a class="dropdown-item" (click)="selectSearchType('All')">All</a>
+                  <a class="dropdown-item" (click)="selectSearchType('Movie')">Movie</a>
+                  <a class="dropdown-item" (click)="selectSearchType('Actor')">Actor</a>
               </div>
-            </div>
-            <input type="text" class="form-control" placeholder="Search IMDB" aria-label="Text input with dropdown button">
+          </div>
+          
+            <input type="text" class="form-control"  [(ngModel)]="searchQuery" (ngModelChange)="onSearch()" placeholder="Search IMDB" aria-label="Text input with dropdown button">
             <div class="input-group-append">
               <span class="input-group-text"><i class="bi bi-search"></i></span>
             </div>
@@ -84,6 +87,40 @@
     </div>
   </div>
 </nav>
+<div class="row" *ngIf="searchQuery && searchMovieResults && searchMovieResults.length > 0 && selectedOption!='Actor' ">
+  <div class="col-sm-10 col-lg-9 offset-lg-2">
+    <h1 class="text-white fw-bold">Titles</h1>
+    <ul>
+      <li *ngFor="let movie of searchMovieResults">
+        <div class="row align-items-center mb-3">
+          <div class="col-xl-1 col-lg-2 col-md-3 col-sm-4 col-xs-5">
+            <img [src]="movie.posterUrl" alt="{{ movie.title }}" class="img-fluid rounded">
+          </div>
+          <div class="col-xl-9 col-lg-8 col-md-7 col-sm-6 col-xs-5">
+            <h4 class="text-white">{{ movie.title }}</h4>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+<div class="row" *ngIf="searchQuery && searchActorResults && searchActorResults.length > 0 && selectedOption!='Movie' ">
+  <div class="col-sm-10 col-lg-9 offset-lg-2">
+    <h1 class="text-white fw-bold">People</h1>
+    <ul>
+      <li *ngFor="let actor of searchActorResults">
+        <div class="row align-items-center mb-3">
+          <div class="col-xl-1 col-lg-2 col-md-3 col-sm-4 col-xs-5">
+            <img [src]="actor.photoUrl" alt="{{ actor.name }}+picture alt text" class="img-fluid rounded">
+          </div>
+          <div class="col-xl-9 col-lg-8 col-md-7 col-sm-6 col-xs-5">
+            <h4 class="text-white">{{ actor.name }}</h4>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
 
 
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -91,7 +128,7 @@
     <div class="modal-content bg-dark">
       <div class="modal-header">
         <h3 style="color:#F5C518;" class="modal-title" id="exampleModalLabel">Watchlist</h3>
-        <button style="color: white;" (click)="closeModal()" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button style="color: white; background-color: white;" (click)="closeModal()" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <div *ngFor="let movie of watchlist">

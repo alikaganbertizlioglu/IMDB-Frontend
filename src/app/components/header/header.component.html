@@ -13,10 +13,10 @@
           <div class="dropdown">
             <button class="btn btn-outline-white dropdown-toggle text-light" type="button" data-toggle="dropdown"
               aria-expanded="false">
-              <i class="bi bi-list"></i> Menu
+              <i class="bi bi-list"></i> {{"MENU" | translate}}
             </button>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Not implemented</a></li>
+              <li><a class="dropdown-item" href="#">{{"NOT_IMPLEMENTED" | translate}}</a></li>
             </ul>
           </div>
         </li>
@@ -24,16 +24,16 @@
           <div class="input-group mb-auto">
             <div class="input-group-prepend">
               <button class="btn btn-outline-secondary dropdown-toggle bg-light fw-bold fw-black" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  {{ selectedOption }}
+                  {{ selectedOption || 'ALL'|translate }}
               </button>
               <div class="dropdown-menu">
-                  <a class="dropdown-item" (click)="selectSearchType('All')">All</a>
-                  <a class="dropdown-item" (click)="selectSearchType('Movie')">Movie</a>
-                  <a class="dropdown-item" (click)="selectSearchType('Actor')">Actor</a>
+                  <a class="dropdown-item" (click)="selectSearchType('All')">{{"ALL" | translate}}</a>
+                  <a class="dropdown-item" (click)="selectSearchType('Movie')">{{"MOVIE" | translate}}</a>
+                  <a class="dropdown-item" (click)="selectSearchType('Actor')">{{"ACTOR" | translate}}</a>
               </div>
           </div>
           
-            <input type="text" class="form-control"  [(ngModel)]="searchQuery" (ngModelChange)="onSearch()" placeholder="Search IMDB" aria-label="Text input with dropdown button">
+            <input type="text" class="form-control"  [(ngModel)]="searchQuery" (ngModelChange)="onSearch()" placeholder="{{'SEARCH_IMDB'|translate}}" aria-label="Text input with dropdown button">
             <div class="input-group-append">
               <span class="input-group-text"><i class="bi bi-search"></i></span>
             </div>
@@ -46,16 +46,16 @@
           <div class="duzCubuk"></div>
         </li>
         <li class="nav-item" >
-          <a class="nav-link d-flex" style="cursor: pointer;">
+          <a class="nav-link d-flex text-now" style="cursor: pointer;">
             <i style="color: white;" class="bi bi-bookmark-plus"></i>
-            Watchlist
+            {{"WATCHLIST" | translate}}
           </a>
         </li>
         <li *ngIf="!isUserAuthenticated()" class="nav-item">
-          <a class="nav-link" routerLink="/register">Register</a>
+          <a class="nav-link" routerLink="/register">{{"REGISTER" | translate}}</a>
         </li>
         <li *ngIf="!isUserAuthenticated()" class="nav-item">
-          <a class="nav-link" routerLink="/login">Login</a>
+          <a class="nav-link" routerLink="/login">{{"LOGIN" | translate}}</a>
         </li>
         <li *ngIf="isUserAuthenticated()" class="nav-item">
           <div class="dropdown">
@@ -65,9 +65,8 @@
               {{getUserName()}}
             </button>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" (click)="logout()" href="#">Logout</a></li>
-              <li><a class="dropdown-item" (click)="displayWatchlist()">Display Watchlist</a></li>
-
+              <li><a class="dropdown-item" (click)="logout()" href="#">{{"LOGOUT" | translate}}</a></li>
+              <li><a class="dropdown-item" (click)="displayWatchlist()">{{"DISPLAY_WATCHLIST" | translate}}</a></li>
             </ul>
           </div>
         </li>
@@ -75,11 +74,11 @@
           <div class="dropdown">
             <button class="btn btn-outline-white dropdown-toggle text-light" type="button" data-toggle="dropdown"
               aria-expanded="false">
-              EN
+              {{ translateService.currentLang || translateService.getBrowserLang() }}
             </button>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">TR</a></li>
-              <li><a class="dropdown-item" href="#">EN</a></li>
+              <li><a class="dropdown-item" (click)="chooseLang('tr')" >TR</a></li>
+              <li><a class="dropdown-item"(click)="chooseLang('en')">EN</a></li>
             </ul>
           </div>
         </li>
@@ -97,7 +96,7 @@
   </div>
   <div class="row" *ngIf="searchQuery && searchMovieResults && searchMovieResults.length > 0 && selectedOption!='Actor' ">
     <div class="col-sm-10 col-lg-9 offset-lg-2">
-      <h1 class="text-white fw-bold">Titles</h1>
+      <h1 class="text-white fw-bold">{{"TITLES" | translate}}</h1>
       <ul>
         <li *ngFor="let movie of searchMovieResults">
           <div class="row align-items-center mb-3">
@@ -114,7 +113,7 @@
   </div>
   <div class="row" *ngIf="searchQuery && searchActorResults && searchActorResults.length > 0 && selectedOption!='Movie' ">
     <div class="col-sm-10 col-lg-9 offset-lg-2">
-      <h1 class="text-white fw-bold">People</h1>
+      <h1 class="text-white fw-bold">{{"PEOPLE" | translate}}</h1>
       <ul>
         <li *ngFor="let actor of searchActorResults">
           <div class="row align-items-center mb-3">
@@ -145,7 +144,7 @@
       </div>
       <div *ngIf="!(spinnerService.isLoading$ | async)" >
         <div class="modal-header">
-          <h3 style="color:#F5C518;" class="modal-title" id="exampleModalLabel">Watchlist</h3>
+          <h3 style="color:#F5C518;" class="modal-title" id="exampleModalLabel">{{"WATCHLIST" | translate}}</h3>
           <button style="color: white; background-color: white;" (click)="closeModal()" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">

@@ -14,6 +14,7 @@ import { CarouselModule } from 'primeng/carousel';
 import { RatingModule } from 'primeng/rating';
 import { MovieComponent } from './components/movie/movie.component';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
 }
@@ -35,11 +36,17 @@ export function HttpLoaderFactory(http: HttpClient) {
     CarouselModule,
     FormsModule,
     RatingModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient],
+      },
+    }),
   ],
   providers: [
     provideClientHydration(),
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
-
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
   ],
   bootstrap: [AppComponent]
 })

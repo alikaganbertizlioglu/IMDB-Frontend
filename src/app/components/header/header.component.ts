@@ -3,6 +3,7 @@ import { AuthService } from '../../services/auth/auth.service';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environment';
 import { SpinnerService } from '../../services/spinner/spinner.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-header',
@@ -12,15 +13,16 @@ import { SpinnerService } from '../../services/spinner/spinner.service';
 export class HeaderComponent {
   @ViewChild('exampleModal') modal: any;
   searchQuery!: string;
-  selectedOption: string = 'All'; // Default to 'All'
+  selectedOption!: string; // Default to 'All'
   searchMovieResults!:any[];
   searchActorResults!:any[];
   userName!: string;
   watchlist!:any[];
   apiUrl = environment.apiUrl;
   
-  constructor(private authService: AuthService,private http:HttpClient,private renderer:Renderer2,public spinnerService:SpinnerService) {
-
+  constructor(private authService: AuthService,private http:HttpClient,private renderer:Renderer2,public spinnerService:SpinnerService,
+    protected translateService:TranslateService) {
+      
   }
 
   ngOnInit(){
@@ -99,6 +101,10 @@ export class HeaderComponent {
       }
     });  
     }
+  }
+
+  chooseLang(lang:string){
+    this.translateService.use(lang);
   }
 
 }

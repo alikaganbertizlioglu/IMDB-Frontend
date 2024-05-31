@@ -1,9 +1,9 @@
 <div class="row">
   <div class="col-sm-12 col-lg-10 offset-lg-1">
     <div style="display: flex;" class="row">
-      <div class="col-12">
+      <div class="col-12" style="margin-top: 10px;">
         <h1 class="text-white">
-          Top 10 on IMDB this week</h1>
+          {{"TOP_TEN" |translate}}</h1>
       </div>
     </div>
 
@@ -35,7 +35,7 @@
               <div class="row">
                 <div class="col-12">
                   <button style="width: 100%;"  type="button" class="mb-3 btn btn-secondary" (click)="addMovieToWatchlist(movie.id)">
-                    <i style="color:#5799ef;" class="bi bi-plus fw-bold">Watchlist</i>
+                    <i style="color:#5799ef;" class="bi bi-plus fw-bold">{{"WATCHLIST" | translate}}</i>
                   </button>
                 </div>
               </div>

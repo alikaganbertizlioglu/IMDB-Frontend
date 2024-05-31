@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" style="margin-bottom: 5rem;">
     <h2>Login</h2>
     <form [formGroup]="loginForm" (ngSubmit)="submitForm()">
         <div class="form-group">
@@ -11,6 +11,6 @@
             <input type="password" class="form-control" id="password" formControlName="password" autocomplete="current-password" />
         </div>
 
-        <button type="submit" class="btn btn-primary" [disabled]="loginForm.invalid">Login</button>
+        <button type="submit" class="btn imdb-color" [disabled]="loginForm.invalid">Login</button>
     </form>
 </div>

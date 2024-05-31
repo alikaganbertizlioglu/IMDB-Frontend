@@ -2,6 +2,7 @@ import { Component, Renderer2, ViewChild, signal } from '@angular/core';
 import { AuthService } from '../../services/auth/auth.service';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environment';
+import { SpinnerService } from '../../services/spinner/spinner.service';
 
 @Component({
   selector: 'app-header',
@@ -18,7 +19,7 @@ export class HeaderComponent {
   watchlist!:any[];
   apiUrl = environment.apiUrl;
   
-  constructor(private authService: AuthService,private http:HttpClient,private renderer:Renderer2) {
+  constructor(private authService: AuthService,private http:HttpClient,private renderer:Renderer2,public spinnerService:SpinnerService) {
 
   }
 
@@ -40,10 +41,12 @@ export class HeaderComponent {
 
   displayWatchlist(){
     const userId = localStorage.getItem('userId');
+    this.openModal();
+    this.spinnerService.setLoadingState(true);
     this.http.get<any>(`${this.apiUrl}/api/watchlist/get/${userId}`).subscribe({
       next: (response) => {
+        this.spinnerService.setLoadingState(false);
         this.watchlist = response;
-        this.openModal();
       },
       error: (error) => {
         console.error('An error occurred while fetching users watchlist', error);
@@ -67,17 +70,20 @@ export class HeaderComponent {
   selectSearchType(option: string) {
       this.selectedOption = option;
       console.log(this.selectSearchType);
-      // You can add further logic here, such as triggering the search with the selected option
   }
 
   onSearch() {
     console.log('Searching for:', this.searchQuery);
     if(this.selectedOption!='Actor' && this.searchQuery!=''){
+      this.spinnerService.setLoadingState(true);
       this.http.get<any>(`${this.apiUrl}/public/api/movies/search/${this.searchQuery}`).subscribe({
       next: (response) => {
+        this.spinnerService.setLoadingState(false);
         this.searchMovieResults = response.movieList;
       },
       error: (error) => {
+        this.spinnerService.setLoadingState(false);
+
         console.error('An error occurred while searching movies', error);
       }
     });  

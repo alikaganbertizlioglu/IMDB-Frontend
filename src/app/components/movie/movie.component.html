@@ -1,28 +1,46 @@
+<div *ngIf="(spinnerService.isLoading$ | async) && !movie" class="spinner-overlay">
+    <div class="d-flex justify-content-center" style="margin: 10%;">
+        <div class="spinner-border" style="width: 7rem; height: 7rem;  color: #F5C518;" role="status">
+          <span style="font-size: xx-large;" class="sr-only"></span>
+        </div>
+    </div>
+</div>
+
 <div class="row background-gradient">
     <div *ngIf="movie" class="col-sm-12 col-lg-10 offset-lg-1">
         <div class="row">
             <div class="col-lg-5 col-md-4 col-sm-3">
-                <h1 class="text-white">{{movie.title}}</h1>
+                <div class="d-flex flex-column">
+                    <h1 class="text-white">{{movie.title}}</h1>
+                        <label class="muted-text">{{movie.releaseYear}} - {{movie.length}} minutes</label>
+                </div>
             </div>
-            <div class="col-lg-4 col-md-5 sm-9 d-flex  offset-lg-3">
-                <div class="d-flex align-items-center">
+            <div class="col-lg-4 col-md-5 sm-9 d-flex offset-lg-3">
+                <div class="d-flex flex-column align-items-center">
+                    <label class="text-white mb-1">MOVIE RATING</label>
                     <h3 class="text-white mb-0">
                         <i class="bi bi-star-fill" style="color: yellow;"></i>
-                        {{movie.rating}} <small class="muted">/10</small>
+                        {{ movie.avgRating | number:'1.2-2' }}
+                        <small class="muted-text">/10</small>
                     </h3>
                 </div>
-                <div class="d-flex align-items-center ms-3">
-                    <button type="button" class="btn btn-dark d-flex ">
+                <div class="d-flex flex-column align-items-center ms-3">
+                    <label class="text-white mb-1">YOUR RATE</label>
+                    <button (click)="openRatePopUp()" type="button" class="btn btn-dark d-flex">
                         <i class="bi bi-star" style="color:#5799ef; margin-right: 5px;"></i>
                         <label class="text-white mb-0">Rate</label>
                     </button>
                 </div>
-                <div class="d-flex align-items-center ms-3">
-                    <i class="bi bi-graph-up-arrow" style="margin-right: 5px;"></i>
-                    <label class="text-white mb-0" style="font-size: x-large;">{{movie.popularityRanking}}</label>
+                <div class="d-flex flex-column align-items-center ms-3">
+                    <label class="text-white mb-1">POPULARITY</label>
+                    <div class="d-flex align-items-center">
+                        <i class="bi bi-graph-up-arrow" style="margin-right: 5px;"></i>
+                        <label class="text-white mb-0" style="font-size: x-large;">{{movie.popularityRanking}}</label>
+                    </div>
                 </div>
             </div>
         </div>
+        
         <div class="row">
             <div class="col-lg-3 col-sm-4">
                 <img [src]="movie.posterUrl" alt="">
@@ -33,3 +51,37 @@
         </div>
     </div>
 </div>
+
+
+
+
+
+<!-- Rating Modal -->
+<div class="modal fade" id="ratingModal" tabindex="-1" aria-labelledby="ratingModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div *ngIf="(spinnerService.isLoading$ | async)" class="spinner-overlay">
+          <div class="d-flex justify-content-center" style="margin: 10%;">
+              <div class="spinner-border" style="width: 7rem; height: 7rem;  color: #F5C518;" role="status">
+                <span style="font-size: xx-large;" class="sr-only"></span>
+              </div>
+          </div>
+        </div>
+        <div *ngIf="!(spinnerService.isLoading$ | async)">
+          <div class="modal-header">
+            <h5 class="modal-title" id="ratingModalLabel">Rate Movie</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+              <div class="mb-3 d-flex justify-content-center">
+                <p-rating [(ngModel)]="rating" [stars]="10" [cancel]="false"></p-rating>
+              </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn imdb-color" (click)="submitRating()">Submit</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

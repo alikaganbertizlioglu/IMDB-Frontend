@@ -21,6 +21,8 @@
     "@angular/platform-server": "^17.0.0",
     "@angular/router": "^17.0.0",
     "@angular/ssr": "^17.0.8",
+    "@ngx-translate/core": "^15.0.0",
+    "@ngx-translate/http-loader": "^8.0.0",
     "alertifyjs": "^1.14.0",
     "bootstrap": "^5.3.3",
     "bootstrap-icons": "^1.11.3",

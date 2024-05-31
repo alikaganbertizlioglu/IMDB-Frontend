@@ -4,11 +4,12 @@ export interface Movie {
     description?: string;
     releaseYear?: number;
     genre?: string;
-    rating?: number;
+    avgRating?: number;
     posterUrl?: string;
     videoUrl: string;
     popularityRanking: number;
     numberOfViewer: number;
+    length:number;
 }
 
 

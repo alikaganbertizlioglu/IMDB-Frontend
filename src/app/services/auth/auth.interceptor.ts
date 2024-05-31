@@ -32,7 +32,6 @@ export class AuthInterceptor implements HttpInterceptor {
           alert("tokenin süresi bitmiş");
           localStorage.clear();
           // Unauthorized, redirect to login
-          // Assuming your login route is '/login'
           this.router.navigate(['/login']);
         }
         return throwError(error);

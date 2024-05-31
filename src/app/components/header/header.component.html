@@ -87,53 +87,72 @@
     </div>
   </div>
 </nav>
-<div class="row" *ngIf="searchQuery && searchMovieResults && searchMovieResults.length > 0 && selectedOption!='Actor' ">
-  <div class="col-sm-10 col-lg-9 offset-lg-2">
-    <h1 class="text-white fw-bold">Titles</h1>
-    <ul>
-      <li *ngFor="let movie of searchMovieResults">
-        <div class="row align-items-center mb-3">
-          <div class="col-xl-1 col-lg-2 col-md-3 col-sm-4 col-xs-5">
-            <img [src]="movie.posterUrl" alt="{{ movie.title }}" class="img-fluid rounded">
-          </div>
-          <div class="col-xl-9 col-lg-8 col-md-7 col-sm-6 col-xs-5">
-            <h4 class="text-white">{{ movie.title }}</h4>
-          </div>
+<div>
+  <div *ngIf="(spinnerService.isLoading$ | async) && searchQuery" class="spinner-overlay">
+    <div class="d-flex justify-content-center">
+        <div class="spinner-border" style="width: 3rem; height: 3rem;  color: #F5C518;" role="status">
+          <span style="font-size: xx-large;" class="sr-only"></span>
         </div>
-      </li>
-    </ul>
+    </div>
+  </div>
+  <div class="row" *ngIf="searchQuery && searchMovieResults && searchMovieResults.length > 0 && selectedOption!='Actor' ">
+    <div class="col-sm-10 col-lg-9 offset-lg-2">
+      <h1 class="text-white fw-bold">Titles</h1>
+      <ul>
+        <li *ngFor="let movie of searchMovieResults">
+          <div class="row align-items-center mb-3">
+            <div class="col-xl-1 col-lg-2 col-md-3 col-sm-4 col-xs-5">
+              <img [src]="movie.posterUrl" alt="{{ movie.title }}" class="img-fluid rounded">
+            </div>
+            <div class="col-xl-9 col-lg-8 col-md-7 col-sm-6 col-xs-5">
+              <h4 class="text-white">{{ movie.title }}</h4>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="row" *ngIf="searchQuery && searchActorResults && searchActorResults.length > 0 && selectedOption!='Movie' ">
+    <div class="col-sm-10 col-lg-9 offset-lg-2">
+      <h1 class="text-white fw-bold">People</h1>
+      <ul>
+        <li *ngFor="let actor of searchActorResults">
+          <div class="row align-items-center mb-3">
+            <div class="col-xl-1 col-lg-2 col-md-3 col-sm-4 col-xs-5">
+              <img [src]="actor.photoUrl" alt="{{ actor.name }}+picture alt text" class="img-fluid rounded">
+            </div>
+            <div class="col-xl-9 col-lg-8 col-md-7 col-sm-6 col-xs-5">
+              <h4 class="text-white">{{ actor.name }}</h4>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
   </div>
 </div>
-<div class="row" *ngIf="searchQuery && searchActorResults && searchActorResults.length > 0 && selectedOption!='Movie' ">
-  <div class="col-sm-10 col-lg-9 offset-lg-2">
-    <h1 class="text-white fw-bold">People</h1>
-    <ul>
-      <li *ngFor="let actor of searchActorResults">
-        <div class="row align-items-center mb-3">
-          <div class="col-xl-1 col-lg-2 col-md-3 col-sm-4 col-xs-5">
-            <img [src]="actor.photoUrl" alt="{{ actor.name }}+picture alt text" class="img-fluid rounded">
-          </div>
-          <div class="col-xl-9 col-lg-8 col-md-7 col-sm-6 col-xs-5">
-            <h4 class="text-white">{{ actor.name }}</h4>
-          </div>
-        </div>
-      </li>
-    </ul>
-  </div>
-</div>
+
 
 
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content bg-dark">
-      <div class="modal-header">
-        <h3 style="color:#F5C518;" class="modal-title" id="exampleModalLabel">Watchlist</h3>
-        <button style="color: white; background-color: white;" (click)="closeModal()" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+  <div class="modal-dialog modal-dialog-centered" style="padding-bottom: 20vh !important;">
+    <div class="modal-content bg-dark" style="border-color: #F5C518;">
+      <div *ngIf="(spinnerService.isLoading$ | async)" class="spinner-overlay">
+        <div class="d-flex justify-content-center" style="margin: 10%;">
+            <div class="spinner-border" style="width: 3rem; height: 3rem;  color: #F5C518;" role="status">
+              <span style="font-size: xx-large;" class="sr-only"></span>
+            </div>
+        </div>
       </div>
-      <div class="modal-body">
-        <div *ngFor="let movie of watchlist">
-          <h5 class="text-white">{{ movie.title }}</h5>
-          <hr>
+      <div *ngIf="!(spinnerService.isLoading$ | async)" >
+        <div class="modal-header">
+          <h3 style="color:#F5C518;" class="modal-title" id="exampleModalLabel">Watchlist</h3>
+          <button style="color: white; background-color: white;" (click)="closeModal()" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div *ngFor="let movie of watchlist">
+            <h5 class="text-white">{{ movie.title }}</h5>
+            <hr>
+          </div>
         </div>
       </div>
     </div>

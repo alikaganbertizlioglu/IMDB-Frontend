@@ -24,7 +24,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/se3355-frontend-angular",
+            "outputPath": "dist/se3355-frontend-angular/browser",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import { AlertifyService } from '../../services/alertify/alertify.service';
 import { AuthService } from '../../services/auth/auth.service';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-register',
@@ -11,14 +12,24 @@ import { AuthService } from '../../services/auth/auth.service';
 export class RegisterComponent implements OnInit {
 
   registerForm!: FormGroup;
+  countries!: any[];
+  cities!: any[];
+  selectedCountry: any;
+  selectedCity: any;
 
   constructor(
     private authService: AuthService,
     private fb: FormBuilder,
-    private alertifyService: AlertifyService
+    private alertifyService: AlertifyService,
+    private http:HttpClient
   ) {}
 
   ngOnInit(): void {
+    this.initRegisterFormValidations();
+    this.getCountriesAndCities();
+  }
+
+  initRegisterFormValidations(){
     this.registerForm = this.fb.group({
       name: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
@@ -28,7 +39,21 @@ export class RegisterComponent implements OnInit {
         this.passwordValidator
       ]],
       confirmPassword: ['', [Validators.required]],
+      country: ['', [Validators.required]],
+      city: ['', [Validators.required]]
     }, { validator: this.passwordMatchValidator });
+  }
+
+  getCountriesAndCities(){
+    this.http.get<any>('https://countriesnow.space/api/v0.1/countries')
+    .subscribe(
+      (response) => {
+        this.countries = response.data;
+      },
+      (error) => {
+        console.error('Error fetching countries:', error);
+      }
+    );
   }
 
   passwordValidator(control: AbstractControl): { [key: string]: any } | null {
@@ -52,7 +77,13 @@ export class RegisterComponent implements OnInit {
     }
   }
 
-
+  onCountryChange(event: any) {
+    const countryName = event.target.value;
+    if (countryName) {
+      this.selectedCountry = this.countries.find(country => country.country === countryName);
+      this.selectedCity = null;
+    }
+  }
 
   submitForm() {
     if (this.registerForm.valid) {

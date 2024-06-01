@@ -5,6 +5,7 @@ export interface Movie {
     releaseYear?: number;
     genre?: string;
     avgRating?: number;
+    numberOfRatingVotes?:number;
     posterUrl?: string;
     videoUrl: string;
     popularityRanking: number;

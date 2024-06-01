@@ -12,5 +12,10 @@
         </div>
 
         <button type="submit" class="btn imdb-color" [disabled]="loginForm.invalid">Login</button>
+
+        <button (click)="loginWithGoogle()" style="margin-top: 10px;" type="button" class="login-with-google-btn" >
+            Login with Google
+          </button>
+
     </form>
 </div>

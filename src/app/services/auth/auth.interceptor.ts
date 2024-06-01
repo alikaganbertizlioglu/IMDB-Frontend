@@ -10,7 +10,7 @@ export class AuthInterceptor implements HttpInterceptor {
   constructor(private router: Router) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    if (req.url.includes('public')) {
+    if (req.url.includes('public') || req.url.includes('countriesnow')) {
       // Skip intercepting requests to public endpoints
       return next.handle(req);
     }

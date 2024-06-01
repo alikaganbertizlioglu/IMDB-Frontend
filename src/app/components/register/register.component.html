@@ -38,7 +38,23 @@
           Passwords must match.
         </div>
       </div>
-  
+
+      <div class="form-group">
+        <label for="country">Country</label>
+        <select class="form-control" id="country" formControlName="country" (change)="onCountryChange($event)">
+          <option value="" disabled selected>Select a country</option>
+          <option *ngFor="let country of countries" [value]="country.country">{{ country.country }}</option>
+        </select>
+      </div>
+      
+      <div class="form-group" *ngIf="selectedCountry">
+        <label for="city">City</label>
+        <select class="form-control" id="city" formControlName="city">
+          <option value="" disabled selected>Select a city</option>
+          <option  *ngFor="let city of selectedCountry?.cities" [value]="city">{{ city }}</option>
+        </select>
+      </div>
+
       <button type="submit" class="btn btn imdb-color" [disabled]="registerForm.invalid">Register</button>
     </form>
   </div>

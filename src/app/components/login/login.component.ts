@@ -36,4 +36,8 @@ export class LoginComponent {
       }
     )
   }
+
+  loginWithGoogle(){
+    alert("not implemented due to credit card is mandatory to registration into google cloud");
+  }
 }

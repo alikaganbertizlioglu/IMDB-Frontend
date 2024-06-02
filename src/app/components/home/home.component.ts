@@ -8,7 +8,6 @@ import { Movie } from '../../models/movie.model';
 import { AlertifyService } from '../../services/alertify/alertify.service';
 import { RatingService } from '../../services/rating/rating.service';
 import { SpinnerService } from '../../services/spinner/spinner.service';
-declare var bootstrap: any;
 
 @Component({
   selector: 'app-home',

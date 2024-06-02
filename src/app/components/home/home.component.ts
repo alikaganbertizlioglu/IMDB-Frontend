@@ -57,7 +57,7 @@ export class HomeComponent {
         this.movies = response.data;
       },
       error: (error) => {
-        console.error('An error occurred while fetching movies', error);
+        this.alertifyService.error('An error occurred while fetching movies '+ error);
       }
     });
   }

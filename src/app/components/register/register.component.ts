@@ -51,7 +51,7 @@ export class RegisterComponent implements OnInit {
         this.countries = response.data;
       },
       (error) => {
-        console.error('Error fetching countries:', error);
+        this.alertifyService.error('Error fetching countries: '+ error);
       }
     );
   }

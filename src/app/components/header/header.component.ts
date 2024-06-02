@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environment';
 import { SpinnerService } from '../../services/spinner/spinner.service';
 import { TranslateService } from '@ngx-translate/core';
+import { AlertifyService } from '../../services/alertify/alertify.service';
 
 @Component({
   selector: 'app-header',
@@ -21,6 +22,7 @@ export class HeaderComponent {
   apiUrl = environment.apiUrl;
   
   constructor(private authService: AuthService,private http:HttpClient,private renderer:Renderer2,public spinnerService:SpinnerService,
+    private alertifyService:AlertifyService,
     protected translateService:TranslateService) {
       
   }
@@ -51,7 +53,7 @@ export class HeaderComponent {
         this.watchlist = response;
       },
       error: (error) => {
-        console.error('An error occurred while fetching users watchlist', error);
+        this.alertifyService.error('An error occurred while fetching users watchlist:'+  error);
       }
     });
   }
@@ -84,7 +86,7 @@ export class HeaderComponent {
       error: (error) => {
         this.spinnerService.setLoadingState(false);
 
-        console.error('An error occurred while searching movies', error);
+        this.alertifyService.error('An error occurred while searching movies '+ error);
       }
     });  
     }
@@ -95,7 +97,7 @@ export class HeaderComponent {
         this.searchActorResults = response.actorList;
       },
       error: (error) => {
-        console.error('An error occurred while searching actors', error);
+        this.alertifyService.error('An error occurred while searching actors ' + error);
       }
     });  
     }

@@ -12,28 +12,28 @@
             <div class="col-lg-5 col-md-4 col-sm-3">
                 <div class="d-flex flex-column">
                     <h1 class="text-white">{{movie.title}}</h1>
-                        <label class="muted-text">{{movie.releaseYear}} - {{movie.length}} minutes</label>
+                        <label class="muted-text">{{movie.releaseYear}} - {{movie.length}} {{"MINUTES" | translate}}</label>
                 </div>
             </div>
             <div class="col-lg-4 col-md-5 sm-9 d-flex offset-lg-3">
                 <div class="d-flex flex-column align-items-center">
-                    <label class="text-white mb-1">MOVIE RATING</label>
+                    <label class="text-white mb-1">{{ 'MOVIE_RATING' | translate }}</label>
                     <h3 class="text-white mb-0">
                         <i class="bi bi-star-fill" style="color: yellow;"></i>
                         {{ movie.avgRating | number:'1.2-2' }}
                         <small class="muted-text">/10</small>
                     </h3>
-                    <small class="muted-text">by {{movie.numberOfRatingVotes}} vote</small>
+                    <small class="muted-text">{{ 'BY_VOTES' | translate: { count: movie.numberOfRatingVotes } }}</small>
                 </div>
                 <div class="d-flex flex-column align-items-center ms-3">
-                    <label class="text-white mb-1">YOUR RATE</label>
+                    <label class="text-white mb-1">{{ 'YOUR_RATE' | translate }}</label>
                     <button (click)="openModal()" type="button" class="btn btn-dark d-flex">
                         <i class="bi bi-star" style="color:#5799ef; margin-right: 5px;"></i>
-                        <label class="text-white mb-0">Rate</label>
+                        <label class="text-white mb-0">{{ 'RATE' | translate }}</label>
                     </button>
                 </div>
                 <div class="d-flex flex-column align-items-center ms-3">
-                    <label class="text-white mb-1">POPULARITY</label>
+                    <label class="text-white mb-1">{{ 'POPULARITY' | translate }}</label>
                     <div class="d-flex align-items-center">
                         <i class="bi bi-graph-up-arrow" style="margin-right: 5px;"></i>
                         <label class="text-white mb-0" style="font-size: x-large;">{{movie.popularityRanking}}</label>
@@ -53,8 +53,6 @@
     </div>
 </div>
 
-
-
 <div class="modal fade" id="ratingModal" tabindex="-1" aria-labelledby="ratingModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" style="padding-bottom: 50vh !important;">
       <div class="modal-content bg-dark" style="border-color: #F5C518">
@@ -67,7 +65,7 @@
         </div>
         <div *ngIf="!(spinnerService.isLoading$ | async)">
           <div class="modal-header">
-            <h3 style="color:#F5C518;" class="modal-title" id="ratingModalLabel">Rate Movie</h3>
+            <h3 style="color:#F5C518;" class="modal-title" id="ratingModalLabel">{{ 'RATE_MOVIE' | translate }}</h3>
             <button style="color: white; background-color: white;" (click)="closeModal()" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
@@ -76,8 +74,8 @@
               </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" (click)="closeModal()">Close</button>
-            <button type="button" class="btn imdb-color" (click)="submitRating()">Submit</button>
+            <button type="button" class="btn btn-secondary" (click)="closeModal()">{{ 'CLOSE' | translate }}</button>
+            <button type="button" class="btn imdb-color" (click)="submitRating()">{{ 'SUBMIT' | translate }}</button>
           </div>
         </div>
       </div>

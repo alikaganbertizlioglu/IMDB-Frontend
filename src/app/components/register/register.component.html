@@ -1,61 +1,60 @@
 <div class="container" style="margin-bottom: 5rem;">
-    <h2>Register</h2>
-    <form [formGroup]="registerForm" (ngSubmit)="submitForm()">
-      <div class="form-group">
-        <label for="name">Name</label>
-        <input type="text" class="form-control" id="name" formControlName="name" />
-        <div *ngIf="registerForm.get('name')?.invalid && registerForm.get('name')?.touched" class="text-danger">
-          Name is required.
-        </div>
+  <h2>{{ 'REGISTER' | translate }}</h2>
+  <form [formGroup]="registerForm" (ngSubmit)="submitForm()">
+    <div class="form-group">
+      <label for="name">{{ 'NAME' | translate }}</label>
+      <input type="text" class="form-control" id="name" formControlName="name" />
+      <div *ngIf="registerForm.get('name')?.invalid && registerForm.get('name')?.touched" class="text-danger">
+        {{ 'NAME_REQUIRED' | translate }}
       </div>
-  
-      <div class="form-group">
-        <label for="email">Email</label>
-        <input type="email" class="form-control" id="email" formControlName="email" />
-        <div *ngIf="registerForm.get('email')?.invalid && registerForm.get('email')?.touched" class="text-danger">
-          Valid email is required.
-        </div>
-      </div>
-  
-      <div class="form-group">
-        <label for="password">Password</label>
-        <input type="password" class="form-control" id="password" formControlName="password" autocomplete="new-password" />
-        <div *ngIf="registerForm.get('password')?.hasError('required') && registerForm.get('password')?.touched" class="text-danger">
-          Password is required.
-        </div>
-        <div *ngIf="registerForm.get('password')?.hasError('minlength') && registerForm.get('password')?.touched" class="text-danger">
-          Password must be at least 8 characters long.
-        </div>
-        <div *ngIf="registerForm.get('password')?.hasError('passwordInvalid') && registerForm.get('password')?.touched" class="text-danger">
-          Password must contain at least 1 number and 1 non-alphanumeric character.
-        </div>
-      </div>
-  
-      <div class="form-group">
-        <label for="confirmPassword">Confirm Password</label>
-        <input type="password" class="form-control" id="confirmPassword" formControlName="confirmPassword" autocomplete="new-password" />
-        <div *ngIf="registerForm.get('confirmPassword')?.invalid && registerForm.get('confirmPassword')?.touched" class="text-danger">
-          Passwords must match.
-        </div>
-      </div>
+    </div>
 
-      <div class="form-group">
-        <label for="country">Country</label>
-        <select class="form-control" id="country" formControlName="country" (change)="onCountryChange($event)">
-          <option value="" disabled selected>Select a country</option>
-          <option *ngFor="let country of countries" [value]="country.country">{{ country.country }}</option>
-        </select>
+    <div class="form-group">
+      <label for="email">{{ 'EMAIL' | translate }}</label>
+      <input type="email" class="form-control" id="email" formControlName="email" />
+      <div *ngIf="registerForm.get('email')?.invalid && registerForm.get('email')?.touched" class="text-danger">
+        {{ 'EMAIL_REQUIRED' | translate }}
       </div>
-      
-      <div class="form-group" *ngIf="selectedCountry">
-        <label for="city">City</label>
-        <select class="form-control" id="city" formControlName="city">
-          <option value="" disabled selected>Select a city</option>
-          <option  *ngFor="let city of selectedCountry?.cities" [value]="city">{{ city }}</option>
-        </select>
-      </div>
+    </div>
 
-      <button type="submit" class="btn btn imdb-color" [disabled]="registerForm.invalid">Register</button>
-    </form>
-  </div>
-  
+    <div class="form-group">
+      <label for="password">{{ 'PASSWORD' | translate }}</label>
+      <input type="password" class="form-control" id="password" formControlName="password" autocomplete="new-password" />
+      <div *ngIf="registerForm.get('password')?.hasError('required') && registerForm.get('password')?.touched" class="text-danger">
+        {{ 'PASSWORD_REQUIRED' | translate }}
+      </div>
+      <div *ngIf="registerForm.get('password')?.hasError('minlength') && registerForm.get('password')?.touched" class="text-danger">
+        {{ 'PASSWORD_MINLENGTH' | translate }}
+      </div>
+      <div *ngIf="registerForm.get('password')?.hasError('passwordInvalid') && registerForm.get('password')?.touched" class="text-danger">
+        {{ 'PASSWORD_INVALID' | translate }}
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="confirmPassword">{{ 'CONFIRM_PASSWORD' | translate }}</label>
+      <input type="password" class="form-control" id="confirmPassword" formControlName="confirmPassword" autocomplete="new-password" />
+      <div *ngIf="registerForm.get('confirmPassword')?.invalid && registerForm.get('confirmPassword')?.touched" class="text-danger">
+        {{ 'PASSWORDS_MUST_MATCH' | translate }}
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="country">{{ 'COUNTRY' | translate }}</label>
+      <select class="form-control" id="country" formControlName="country" (change)="onCountryChange($event)">
+        <option value="" disabled selected>{{ 'SELECT_COUNTRY' | translate }}</option>
+        <option *ngFor="let country of countries" [value]="country.country">{{ country.country }}</option>
+      </select>
+    </div>
+    
+    <div class="form-group" *ngIf="selectedCountry">
+      <label for="city">{{ 'CITY' | translate }}</label>
+      <select class="form-control" id="city" formControlName="city">
+        <option value="" disabled selected>{{ 'SELECT_CITY' | translate }}</option>
+        <option  *ngFor="let city of selectedCountry?.cities" [value]="city">{{ city }}</option>
+      </select>
+    </div>
+
+    <button type="submit" class="btn btn imdb-color" [disabled]="registerForm.invalid">{{ 'REGISTER_BUTTON' | translate }}</button>
+  </form>
+</div>

@@ -17,11 +17,11 @@ export class AuthService {
   ) {}
 
   register(signRequest: any): Observable<any> {
-    return this.http.post(this.apiUrl+'/public/api/auth/signup', signRequest);
+    return this.http.post(this.apiUrl+'/public/auth/signup', signRequest);
   }
 
   login(loginRequest: any): Observable<any> {
-    return this.http.post(this.apiUrl + '/public/api/auth/login', loginRequest);
+    return this.http.post(this.apiUrl + '/public/auth/login', loginRequest);
   }
   
   isAuthenticated(): boolean {

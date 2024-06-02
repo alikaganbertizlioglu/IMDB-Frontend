@@ -127,7 +127,7 @@ export class HomeComponent {
   }
   
   test(){
-    this.http.get(this.apiUrl + '/api/hello').subscribe({
+    this.http.get(this.apiUrl + '/public/api/hello').subscribe({
       next: (response) => {
         console.log(response); // Log successful response
       },

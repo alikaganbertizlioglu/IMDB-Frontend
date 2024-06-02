@@ -65,7 +65,6 @@ export class HomeComponent {
 
 
   navigateToMovie(movieId:number) {
-    console.log(movieId);
     this.router.navigate(['movie', movieId]);
   }
 
@@ -77,7 +76,6 @@ export class HomeComponent {
       this.http.post(this.apiUrl + '/api/watchlist/add', { userId, movieId }).subscribe({
         next: (response) => {
           this.alertifyService.success("Movie succesfully added into watchlist");
-          console.log(response); // Log successful response
         },
         error: (error) => {
           this.alertifyService.error(error.error)
@@ -126,14 +124,4 @@ export class HomeComponent {
     }
   }
   
-  test(){
-    this.http.get(this.apiUrl + '/api/hello').subscribe({
-      next: (response) => {
-        console.log(response); // Log successful response
-      },
-      error: (error) => {
-        console.log(error);
-      }
-    });
-  }
 }

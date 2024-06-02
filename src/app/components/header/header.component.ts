@@ -71,11 +71,9 @@ export class HeaderComponent {
 
   selectSearchType(option: string) {
       this.selectedOption = option;
-      console.log(this.selectSearchType);
   }
 
   onSearch() {
-    console.log('Searching for:', this.searchQuery);
     if(this.selectedOption!='Actor' && this.searchQuery!=''){
       this.spinnerService.setLoadingState(true);
       this.http.get<any>(`${this.apiUrl}/public/api/movies/search/${this.searchQuery}`).subscribe({

@@ -87,7 +87,6 @@ export class RegisterComponent implements OnInit {
 
   submitForm() {
     if (this.registerForm.valid) {
-      console.log(this.registerForm.value);
       this.authService.register(this.registerForm.value).subscribe(
         (response) => {
           this.alertifyService.success(response.message);

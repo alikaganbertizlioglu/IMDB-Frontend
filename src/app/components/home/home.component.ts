@@ -126,5 +126,14 @@ export class HomeComponent {
     }
   }
   
-  
+  test(){
+    this.http.get(this.apiUrl + '/api/hello').subscribe({
+      next: (response) => {
+        console.log(response); // Log successful response
+      },
+      error: (error) => {
+        console.log(error);
+      }
+    });
+  }
 }

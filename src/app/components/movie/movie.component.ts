@@ -92,4 +92,8 @@ export class MovieComponent {
 
   }
 
+  formatViewers(numberOfViewer: number): string {
+    return numberOfViewer.toLocaleString();
+  }
+
 }

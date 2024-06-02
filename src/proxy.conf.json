@@ -1,0 +1,6 @@
+{
+    "/api": {
+        "target": "https://se3355finalbackend.azurewebsites.net",
+        "secure": false
+    }
+}

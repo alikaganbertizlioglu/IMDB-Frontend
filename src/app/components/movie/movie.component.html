@@ -12,7 +12,7 @@
             <div class="col-lg-5 col-md-4 col-sm-3">
                 <div class="d-flex flex-column">
                     <h1 class="text-white">{{movie.title}}</h1>
-                    <label class="muted-text">{{ movie.releaseYear }} - {{ movie.length }} {{"MINUTES" | translate}} - viewed by {{ formatViewers(movie.numberOfViewer) }}</label>
+                    <label class="muted-text">{{ movie.releaseYear }} - {{ movie.length }} {{"MINUTES" | translate}} - {{ formatViewers(movie.numberOfViewer)}} {{'WATCHED' | translate}}</label>
                 </div>
             </div>
             <div class="col-lg-4 col-md-5 sm-9 d-flex offset-lg-3">

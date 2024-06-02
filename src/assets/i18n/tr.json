@@ -55,5 +55,7 @@
     "RATE_MOVIE": "Filmi Puanla",
     "CLOSE": "Kapat",
     "SUBMIT": "Gönder",
-    "MINUTES": "dakika"
+    "MINUTES": "dakika",
+    "WATCHED": "kişi izledi"
+
 }

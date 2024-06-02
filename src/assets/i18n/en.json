@@ -55,5 +55,6 @@
     "RATE_MOVIE": "Rate Movie",
     "CLOSE": "Close",
     "SUBMIT": "Submit",
-    "MINUTES" :"minutes"
+    "MINUTES" :"minutes",
+    "WATCHED": "person watched"
 }

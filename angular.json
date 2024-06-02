@@ -75,9 +75,7 @@
               "optimization": false,
               "extractLicenses": false,
               "sourceMap": true
-            },
-            "proxyConfig": "src/proxy.conf.json"
-          },
+            }          },
           "defaultConfiguration": "production"
         },
         "serve": {

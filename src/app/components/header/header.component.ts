@@ -86,7 +86,7 @@ export class HeaderComponent {
       error: (error) => {
         this.spinnerService.setLoadingState(false);
 
-        this.alertifyService.error('An error occurred while searching movies '+ error);
+        this.alertifyService.error('An error occurred while searching movies ');
       }
     });  
     }
@@ -97,7 +97,7 @@ export class HeaderComponent {
         this.searchActorResults = response.actorList;
       },
       error: (error) => {
-        this.alertifyService.error('An error occurred while searching actors ' + error);
+        this.alertifyService.error('An error occurred while searching actors ');
       }
     });  
     }

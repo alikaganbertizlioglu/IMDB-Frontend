@@ -46,7 +46,7 @@ export class MovieComponent {
         this.spinnerService.setLoadingState(false); 
       },
       error: (error) => {
-        this.alertifyService.error('An error occurred while fetching movies '+ error);
+        this.alertifyService.error('An error occurred while fetching movies ');
         this.spinnerService.setLoadingState(false); 
       }
     });
